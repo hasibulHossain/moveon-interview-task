@@ -7,7 +7,7 @@ import * as types from '../types';
  */
 export const testOne = (test) => {
     return {
-        type: types.TEST,
+        type: types.PRODUCT_LOADING,
         payload: test
     }
 };
