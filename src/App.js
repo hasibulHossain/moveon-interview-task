@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { testOne } from './redux/store/product';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const {test} = useSelector(state => state.product);
+
+  console.log('test: ', test);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>this is heading</h1>
+      <button onClick={() => dispatch(testOne('hallow world'))}>{test ? test : "Check redux"}</button>
     </div>
   );
 }
