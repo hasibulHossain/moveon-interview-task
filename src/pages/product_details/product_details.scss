@@ -1,3 +1,45 @@
-.proc {
-    color: red;
+.product-details-section {
+    background-color: #ffff;
+
+    padding: 5rem 0rem;
 }
+
+.related-categories {
+    display: flex;
+    padding-bottom: 2rem;
+
+    & div {
+        font-weight: var(--font-weight-medium);
+        min-width: 25rem;
+    }
+}
+
+.breadcrumb {
+    display: flex;
+}
+
+.breadcrumb-item {
+    list-style: none;
+    padding-right: .8rem;
+
+    & a {
+        text-decoration: none;
+    }
+
+    & a span:first-child {
+        padding-right: 1rem;
+    }
+}
+
+
+.product-details {
+    $self: &;
+    display: flex;
+
+    &__gallery {
+        max-width: 50rem;
+        padding-right: 2rem;
+    }
+}
+
+// #{$self}__inner {

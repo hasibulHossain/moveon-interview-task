@@ -11,3 +11,30 @@ export const testOne = (test) => {
         payload: test
     }
 };
+
+
+export const setSwiper = (swiper) => ({
+    type: types.PRODUCT_SLIDER_UPDATED,
+    payload: swiper
+})
+
+export const toggleIsVariantSelected = ({isVariantColorSelected: isVariantColorSelected, swiper: swiper, selectedVariantColor: selectedVariantColor}) => {
+    const payload = {
+        selectedVariantColor: selectedVariantColor,
+        isVariantColorSelected: isVariantColorSelected,
+        swiper: swiper
+    }
+    
+    return {
+        type: types.PRODUCT_SLIDER_UPDATED,
+        payload: payload
+    }
+}
+
+
+export const updateSliderArr = (gallery) => {
+    return {
+        type: types.PRODUCT_SLIDER_GALLERY_UPDATED,
+        payload: gallery
+    }
+}
