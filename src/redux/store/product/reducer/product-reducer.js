@@ -8,6 +8,15 @@ function product(state = initialState, { type, payload }) {
                 test: payload
             };
 
+        case actions.PRODUCT_UPDATE:
+          console.log('from reducer => ', payload)
+            return {
+                ...state,
+                discountedPrice: payload.discountedPrice,
+                oldPrice: payload.oldPrice,
+                discountedPercentage: payload.discountedPercentage,
+            };
+
         case actions.PRODUCT_SLIDER_GALLERY_UPDATED:
             return {
                 ...state,
@@ -182,9 +191,9 @@ const initialState = {
     error: false,
     test: "",
     id: null,
-    discountedPrice: null,
-    oldPrice: null,
-    discountedPercentage: null,
+    discountedPrice: 25,
+    oldPrice: 30,
+    discountedPercentage: 30,
     productDetails: {
         id: null,
         mainImage: "",

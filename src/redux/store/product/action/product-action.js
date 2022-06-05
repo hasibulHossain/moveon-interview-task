@@ -20,10 +20,9 @@ export const toggleIsVariantSelected = ({isVariantColorSelected: isVariantColorS
         swiper: swiper
     }
 
-    return {
+    return { 
         type: types.PRODUCT_SLIDER_UPDATED,
-        payload: payload
-    }
+        payload: payload };
 }
 
 
@@ -31,5 +30,25 @@ export const updateSliderArr = (gallery) => {
     return {
         type: types.PRODUCT_SLIDER_GALLERY_UPDATED,
         payload: gallery
+    }
+}
+
+export const updateProduct = (product) => {
+    console.log('updated product => ', product);
+    const payload = {
+        discountedPrice: null,
+        oldPrice: null,
+        discountedPercentage: null,
+    }
+
+    if(product != undefined) {
+        payload.discountedPrice = product.price.discounted;
+        payload.oldPrice = product.price.old;
+        payload.discountedPercentage = 9;
+    } 
+
+    return {
+        type: types.PRODUCT_UPDATE,
+        payload: payload
     }
 }

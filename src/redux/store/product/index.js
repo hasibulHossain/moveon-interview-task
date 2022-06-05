@@ -1,5 +1,5 @@
 // action
-export { testOne, toggleIsVariantSelected, updateSliderArr } from './action/product-action';
+export { testOne, toggleIsVariantSelected, updateSliderArr, updateProduct } from './action/product-action';
 
 // reducer
 export { default as product } from './reducer/product-reducer';
