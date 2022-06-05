@@ -86,6 +86,36 @@ let mockData = {
           }
         ]
       },
+      {
+        id:200000124,
+        name:"Shoe Size",
+        values:[
+        {
+        id:200000364,
+        name:"39",
+        color:null,
+        image:null,
+        thumb:null,
+        title:"39"
+        },
+        {
+        id:100013888,
+        name:"40",
+        color:null,
+        image:null,
+        thumb:null,
+        title:"40"
+        },
+        {
+        id:100010483,
+        name:"41",
+        color:null,
+        image:null,
+        thumb:null,
+        title:"41"
+        },
+        ]
+        }
     ]
 };
 
@@ -106,7 +136,7 @@ const initialState = {
         ratingCount: null,
         ratingAverage: null,
         skus: [],
-        variant: [...mockData.props]
+        variants: [...mockData.props]
     },
     ui: {
         swiper: null,

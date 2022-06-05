@@ -3,10 +3,11 @@ import ImageSlider from '../../components/image-slider/ImageSlider'
 import { useSelector, useDispatch } from 'react-redux';
 import './product_details.scss'
 import { toggleIsVariantSelected, updateSliderArr } from '../../redux/store/product';
+import VariantPropertyList from '../../components/variant-property-list/VariantPropertyList';
 
 
 function ProductDetails() {
-  const { gallery, variant } = useSelector(state => state.product.productDetails);
+  const { gallery, variants } = useSelector(state => state.product.productDetails);
   const { selectedVariantColor, swiper} = useSelector(state => state.product.ui)
 
 
@@ -84,7 +85,14 @@ function ProductDetails() {
               <span className="discounted-percentage">(50%  OFF)</span>
             </div>
 
-            <div className="product-details__property-box">
+            {
+              variants.map((variant, i) => {
+                return <VariantPropertyList key={i} variant={variant} />
+              })
+            }
+
+
+            {/* <div className="product-details__property-box">
               <div className="product-details__property-title">
                 <span>Color: </span>
                 <span>Black</span>
@@ -93,9 +101,9 @@ function ProductDetails() {
                 <li onClick={() => onbtnclick(variant[0].values[1])} className="property-list-item selected"><div className="property-image"><img src={variant[0].values[1].thumb} alt="" /></div></li>
                 <li onClick={() => onbtnclick(variant[0].values[0])} className="property-list-item"><div className="property-image"><img src={variant[0].values[0].thumb} alt="" /></div></li>
               </ul>
-            </div>
+            </div> */}
 
-            <div className="product-details__property-box">
+            {/* <div className="product-details__property-box">
               <div className="product-details__property-title">
                 <span>Size: </span>
                 <span>23</span>
@@ -110,7 +118,7 @@ function ProductDetails() {
                 <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
                 <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

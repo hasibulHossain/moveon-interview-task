@@ -38,11 +38,12 @@
 
     &__gallery {
         max-width: 50rem;
-        padding-right: 2rem;
+        padding: 2rem;
     }
 
     &__info {
-        padding-right: 1rem;
+        padding: 2rem;
+        padding-top: 0;
 
         #{$self}__title > p{
             font-size: var(--font-size-big);
