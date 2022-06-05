@@ -47,6 +47,62 @@ function product(state = initialState, { type, payload }) {
 
 
 let mockData = {
+    skus: [
+        {
+            "id": 12000028392067142,
+            "price": { "discounted": 21.41, "old": 38.22 },
+            "props": [691, 100010487],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067140,
+            "price": { "discounted": 22.41, "old": 58.22 },
+            "props": [691, 200000337],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067141,
+            "price": { "discounted": 24.41, "old": 38.22 },
+            "props": [691, 200000338],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067138,
+            "price": { "discounted": 21.47, "old": 38.72 },
+            "props": [691, 100013888],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067139,
+            "price": { "discounted": 29.41, "old": 39.22 },
+            "props": [691, 100010483],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067136,
+            "price": { "discounted": 24.41, "old": 33.22 },
+            "props": [771, 100010487],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067137,
+            "price": { "discounted": 22.41, "old": 38.28 },
+            "props": [691, 200000364],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067134,
+            "price": { "discounted": 26.41, "old": 54.22 },
+            "props": [771, 200000337],
+            "stock": 290
+          },
+          {
+            "id": 12000028392067135,
+            "price": { "discounted": 23.41, "old": 57.22 },
+            "props": [771, 200000338],
+            "stock": 290
+          },
+    ],
     gallery: [
         {
           url: "https://ae01.alicdn.com/kf/S7e556daed6ec45e5b605cc8a024badf0d/2022-New-Men-s-Shoes-Mesh-Sneakers-Gray-Tennis-Shoes-Moccasin-Shoes-Lace-Up-Loafers-Comfortable.jpg",
@@ -135,14 +191,18 @@ const initialState = {
         gallery: [...mockData.gallery],
         ratingCount: null,
         ratingAverage: null,
-        skus: [],
+        skus: [...mockData.skus],
         variants: [...mockData.props]
     },
     ui: {
         swiper: null,
         isVariantColorSelected: false,
-        selectedVariantColor: [],
+        selectedVariantColor: {
+          color: [],
+          size: []
+        },
     }
 };
+
 
 export default product;

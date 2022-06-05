@@ -23,23 +23,21 @@ function VariantPropertyList(props) {
   const updateSlider = (selectedVariantImg) => {
     if(selectedVariantImg["color"] == null) return;
 
-    console.log('from updateslider', selectedVariantColor)
-
     const galleryCopy = [...gallery];
     
-    if(selectedVariantColor.length === 1) {
+    if(selectedVariantColor.color.length === 1) {
       galleryCopy.splice(0, 1, selectedVariantImg);
-      const updatedSelectedVariant = [...selectedVariantColor];
-      updatedSelectedVariant[0] = selectedVariantImg;
+      const updatedSelectedVariant = {...selectedVariantColor};
+      updatedSelectedVariant.color[0] = selectedVariantImg;
 
       dispatch(toggleIsVariantSelected({isVariantColorSelected: true, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
     }
 
-    if(selectedVariantColor.length === 0) {
+    if(selectedVariantColor.color.length === 0) {
       galleryCopy.splice(0, 0, selectedVariantImg);
 
-      const updatedSelectedVariant = [...selectedVariantColor];
-      updatedSelectedVariant[0] = selectedVariantImg;
+      const updatedSelectedVariant = {...selectedVariantColor};
+      updatedSelectedVariant.color[0] = selectedVariantImg;
 
       dispatch(toggleIsVariantSelected({isVariantColorSelected: true, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
     }
