@@ -68,7 +68,7 @@ function ProductDetails() {
         {/* product details section */}
         <div className="product-details">
           {/* flex left side */}
-          <div className="product-details__gallery">
+          <div className="product-details__gallery box-shadow">
             <ImageSlider images={gallery} />
           </div>
 
