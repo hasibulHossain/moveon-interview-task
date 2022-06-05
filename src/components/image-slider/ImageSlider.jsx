@@ -26,18 +26,22 @@ const ImageSlider = props => {
         if(!isVariantColorSelected) return;
 
         const filteredImgArr = [...images];
-        filteredImgArr.splice(0, 1);
+        filteredImgArr.splice(0, selectedVariantColor.length);
 
         dispatch(updateSliderArr(filteredImgArr));
 
-        dispatch(toggleIsVariantSelected({isVariantColorSelected: false, selectedVariantColor: selectedVariantColor, swiper: swiper}));
+        dispatch(toggleIsVariantSelected({isVariantColorSelected: false, selectedVariantColor: [], swiper: swiper}));
+    }
+    
+    function swiperHandler(swiper) {
+        dispatch(toggleIsVariantSelected({isVariantColorSelected: isVariantColorSelected, selectedVariantColor: selectedVariantColor, swiper: swiper}));
     }
 
     return <>
-    {/* <button onClick={() => selectColorHandler()}>click test</button> */}
+    {/* <button onClick={() => selectColorHandler()}>click swiperHandler</button> */}
         <Swiper
             onSlideChange={slideChangeHandler}
-            onSwiper={(swiper) => dispatch(setSwiper(swiper))}
+            onSwiper={swiperHandler}
             loop={false}
             spaceBetween={10}
             navigation={true}

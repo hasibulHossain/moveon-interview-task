@@ -12,21 +12,33 @@ function ProductDetails() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-  }, [gallery.length])
+  const onbtnclick = (selectedVariantImg) => {
+    const galleryCopy = [...gallery];
+    
+    if(selectedVariantColor.length === 1) {
+      galleryCopy.splice(0, 1, selectedVariantImg);
+      const updatedSelectedVariant = [...selectedVariantColor];
+      updatedSelectedVariant[0] = selectedVariantImg;
 
-  const onbtnclick = () => {
-    const variantImage = [...gallery];
+      dispatch(toggleIsVariantSelected({isVariantColorSelected: true, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
+      
+    }
+
+    if(selectedVariantColor.length === 0) {
+      galleryCopy.splice(0, 0, selectedVariantImg);
+
+      const updatedSelectedVariant = [...selectedVariantColor];
+      updatedSelectedVariant[0] = selectedVariantImg;
+
+      dispatch(toggleIsVariantSelected({isVariantColorSelected: true, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
+    }
     
-    // TODO: need to create action for variant color select
-    variantImage.splice(0, 0, variant[0].values[1]);
+
+    dispatch(updateSliderArr(galleryCopy))
     
-    // TODO: need to create action for setImages for update gallery
-    // setImages(variantImage);
-    dispatch(updateSliderArr(variantImage));
-    dispatch(toggleIsVariantSelected({isVariantColorSelected: true, selectedVariantColor: selectedVariantColor, swiper: swiper}));
-    
-    swiper.slideTo(0);
+    if(swiper) {
+      swiper.slideTo(0);
+    }
   }
 
   
@@ -73,8 +85,8 @@ function ProductDetails() {
             </div>
 
             <ul className="product-details__property-list">
-              <li onClick={onbtnclick} className="property-list-item"><div className="property-image"><img src={variant[0].values[1].thumb} alt="" /></div></li>
-              <li className="property-list-item"><div className="property-image"><img src="" alt="" /></div></li>
+              <li onClick={() => onbtnclick(variant[0].values[1])} className="property-list-item"><div className="property-image"><img src={variant[0].values[1].thumb} alt="" /></div></li>
+              <li onClick={() => onbtnclick(variant[0].values[0])} className="property-list-item"><div className="property-image"><img src={variant[0].values[0].thumb} alt="" /></div></li>
             </ul>
 
             <ul className="product-details__property-list">

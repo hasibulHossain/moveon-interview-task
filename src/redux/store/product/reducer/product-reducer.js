@@ -18,7 +18,6 @@ function product(state = initialState, { type, payload }) {
             };
 
         case actions.PRODUCT_SLIDER_UPDATED:
-
             return {
                 ...state,
                 ui: {
@@ -112,7 +111,7 @@ const initialState = {
     ui: {
         swiper: null,
         isVariantColorSelected: false,
-        selectedVariantColor: null,
+        selectedVariantColor: [],
     }
 };
 
