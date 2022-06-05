@@ -9,7 +9,6 @@ function product(state = initialState, { type, payload }) {
             };
 
         case actions.PRODUCT_UPDATE:
-          console.log('from reducer => ', payload)
             return {
                 ...state,
                 discountedPrice: payload.discountedPrice,

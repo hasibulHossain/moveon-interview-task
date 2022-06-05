@@ -26,10 +26,8 @@ function VariantPropertyList(props) {
     setSelectedVariantItemName(variantItem.name);
     setSelectedId(variantItem.id);
     updateSlider(variantItem, variantType);
-    // updateSelectedVariantItem(variantItem, variantType);
   }
 
-  // console.log('selectedVariantColor => ', selectedVariantColor)
 
   const updateSlider = (variantItem, variantType) => {
     if(variantType === propEnum["Color"]) {

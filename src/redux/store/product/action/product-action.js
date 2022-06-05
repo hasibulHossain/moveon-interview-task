@@ -34,7 +34,6 @@ export const updateSliderArr = (gallery) => {
 }
 
 export const updateProduct = (product) => {
-    console.log('updated product => ', product);
     const payload = {
         discountedPrice: null,
         oldPrice: null,
