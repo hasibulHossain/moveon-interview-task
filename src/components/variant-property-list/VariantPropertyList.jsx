@@ -21,11 +21,17 @@ function VariantPropertyList(props) {
   const { name: variantName, values: variantItems} = variant;
 
   const firstUpdate = useRef(true);
+  const variantPropertyRef = useRef(null);
   
   function variantItemClickHandler(variantItem, variantType) {
     setSelectedVariantItemName(variantItem.name);
     setSelectedId(variantItem.id);
     updateSlider(variantItem, variantType);
+
+    const isSelected = variantPropertyRef.current.firstChild.classList.contains("selected");
+    if(isSelected) {
+      variantPropertyRef.current.firstChild.classList.remove("selected");
+    }
   }
 
 
@@ -80,6 +86,11 @@ function VariantPropertyList(props) {
     dispatch(toggleIsVariantSelected({isVariantColorSelected: isVariantColorSelected, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
   }
 
+  useEffect(() => {
+    variantPropertyRef.current.firstChild.classList.add("selected");
+  }, [])
+  
+
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -109,7 +120,7 @@ function VariantPropertyList(props) {
         <span>{variantName}: </span>
         <span>{selectedVariantItemName}</span>
       </div>
-      <ul className="product-details__property-list">
+      <ul ref={el => variantPropertyRef.current = el} className="product-details__property-list">
         {
           variantItems.map((variantItem, i) => <VariantPropertyItem key={i} variantItem={variantItem} variantType={variantName} selectedId={selectedId} variantItemClickHandler={variantItemClickHandler} />)
         }

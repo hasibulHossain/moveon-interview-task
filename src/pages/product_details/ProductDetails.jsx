@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import ImageSlider from '../../components/image-slider/ImageSlider'
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './product_details.scss'
 import VariantPropertyList from '../../components/variant-property-list/VariantPropertyList';
+import { fetchProductDetails } from '../../redux/store/product';
 
 
 function ProductDetails() {
   const { gallery, variants } = useSelector(state => state.product.productDetails);
   const { oldPrice, discountedPrice, discountedPercentage, title } = useSelector(state => state.product);
 
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchProductDetails());
+  }, [])
+  
   return (
     <section className="product-details-section">
       <div className="row">
@@ -49,35 +58,6 @@ function ProductDetails() {
                 return <VariantPropertyList key={i} variant={variant} />
               })
             }
-
-
-            {/* <div className="product-details__property-box">
-              <div className="product-details__property-title">
-                <span>Color: </span>
-                <span>Black</span>
-              </div>
-              <ul className="product-details__property-list">
-                <li onClick={() => onbtnclick(variant[0].values[1])} className="property-list-item selected"><div className="property-image"><img src={variant[0].values[1].thumb} alt="" /></div></li>
-                <li onClick={() => onbtnclick(variant[0].values[0])} className="property-list-item"><div className="property-image"><img src={variant[0].values[0].thumb} alt="" /></div></li>
-              </ul>
-            </div> */}
-
-            {/* <div className="product-details__property-box">
-              <div className="product-details__property-title">
-                <span>Size: </span>
-                <span>23</span>
-              </div>
-              <ul className="product-details__property-list">
-                <li className="property-list-item selected"><div className="property-text"><span>14</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-                <li className="property-list-item"><div className="property-text"><span>20</span></div></li>
-              </ul>
-            </div> */}
           </div>
         </div>
       </div>

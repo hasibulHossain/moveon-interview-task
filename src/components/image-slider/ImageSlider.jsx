@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Thumbs } from 'swiper'
-import { useState } from 'react'
-import { setSwiper, toggleIsVariantSelected, updateSliderArr } from '../../redux/store/product';
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import { Navigation, Thumbs } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { setSwiper, toggleIsVariantSelected, updateSliderArr } from '../../redux/store/product';
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -84,4 +84,4 @@ const ImageSlider = props => {
         </div>
     </>
 }
-export default ImageSlider;
+export default React.memo(ImageSlider);

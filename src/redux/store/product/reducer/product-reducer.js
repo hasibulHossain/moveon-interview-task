@@ -2,9 +2,10 @@ import * as actions from '../types';
   
 function product(state = initialState, { type, payload }) {
     switch (type) {
-        case actions.PRODUCT_LOADING:
+        case actions.PRODUCT_LOADING_INPROGRESS:
             return {
                 ...state,
+                isLoading: payload.loading
             };
 
         case actions.PRODUCT_UPDATE:
@@ -38,11 +39,28 @@ function product(state = initialState, { type, payload }) {
         case actions.PRODUCT_LOADED:
             return {
                 ...state,
+                isFetched: true,
+                isLoading: false,
+                id: payload.id,
+                title: payload.title,
+                discountedPrice: payload.price.discounted,
+                oldPrice: payload.price.old,
+                discountedPercentage: payload.discountedPercentage,
+                productDetails: {
+                  mainImage: payload.image,
+                  gallery: payload.gallery,
+                  ratingCount: payload.ratings_count,
+                  ratingAverage: payload.ratings_average,
+                  skus: payload.variation.skus,
+                  variants: payload.variation.props,
+                }
             };
 
         case actions.PRODUCT_LOADING_FAILED:
             return {
                 ...state,
+                isLoading: false,
+                error: true
             };
 
         default:
@@ -191,13 +209,12 @@ const initialState = {
     oldPrice: 30,
     discountedPercentage: 30,
     productDetails: {
-        id: null,
         mainImage: "",
-        gallery: [...mockData.gallery],
+        gallery: [],
         ratingCount: null,
         ratingAverage: null,
-        skus: [...mockData.skus],
-        variants: [...mockData.props]
+        skus: [],
+        variants: []
     },
     ui: {
         swiper: null,
