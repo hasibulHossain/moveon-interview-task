@@ -21,7 +21,7 @@ function VariantPropertyList(props) {
 
   const firstUpdate = useRef(true);
   const variantPropertyRef = useRef(null);
-  
+  const dependentOn = JSON.stringify(selectedVariantColor);
 
   /**
    * This function will call when click on any variant item
@@ -110,7 +110,7 @@ function VariantPropertyList(props) {
     const matchedSku = searchSelectedVariant(skus, selectedVariantColor);
     dispatch(updateProduct(matchedSku));
 
-  }, [JSON.stringify(selectedVariantColor)]);
+  }, [dependentOn]);
   
   return (
     <div className="product-details__property-box">

@@ -17,6 +17,7 @@ export const searchSelectedVariant = (skus, selectedVariantColor) => {
             if(selectedVariantColor.size.length > 0) {
                 return sku.props[1] === selectedVariantColor.size[0].id;
             }
+            return false;
         }
     );
 } 
