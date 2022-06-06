@@ -1,0 +1,1 @@
+export { variantNameEnum } from './variant-name-enum';
