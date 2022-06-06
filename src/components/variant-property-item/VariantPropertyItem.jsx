@@ -1,18 +1,13 @@
-import React, { useState } from 'react'
-import "./variant-property-item.scss"
+import React from 'react'
+import PropTypes from 'prop-types';
+import { variantNameEnum } from '../../common/enum';
 
-// enum
-const propEnum = {
-  "Color": "Color",
-  "Shoe Size": "Shoe Size"
-}
+import "./variant-property-item.scss"
 
 function VariantPropertyItem(props) {
   const { variantItem, variantType, selectedId, variantItemClickHandler } = props;
 
-  // props.isSelected ? 'selected' : '' //classname
-
-  if(propEnum['Color'] == variantType) {
+  if(variantNameEnum["Color"] == variantType) {
     return (
       <li onClick={() => variantItemClickHandler(variantItem, variantType)} className={variantItem.id == selectedId ? "property-list-item selected" : "property-list-item"}>
         <div className="property-image">
@@ -22,7 +17,7 @@ function VariantPropertyItem(props) {
     )
   }
 
-  if(propEnum['Shoe Size'] == variantType) {
+  if(variantNameEnum['Shoe Size'] == variantType) {
     return (
       <li onClick={() => variantItemClickHandler(variantItem, variantType)} className={variantItem.id == selectedId ? "property-list-item selected" : "property-list-item"}>
         <div className="property-text">
@@ -35,30 +30,12 @@ function VariantPropertyItem(props) {
   return null;
 }
 
-
-{/* <li className="property-list-item selected"><div className="property-text"><span>14</span></div></li>
-
-<li onClick={() => onbtnclick(variant[0].values[1])} className="property-list-item selected"><div className="property-image"><img src={variant[0].values[1].thumb} alt="" /></div></li> */}
+VariantPropertyItem.prototype = {
+  variantItem: PropTypes.object.isRequired,
+  variantType: PropTypes.string.isRequired,
+  selectedId: PropTypes.number.isRequired,
+  variantItemClickHandler: PropTypes.func.isRequired
+}
 
 export default VariantPropertyItem;
 
-
-
-
-
-
-
-
-
-
-
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render
-// nedd to use useRef for select variant on first render

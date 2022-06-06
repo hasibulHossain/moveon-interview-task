@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import ImageSlider from '../../components/image-slider/ImageSlider'
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import './product_details.scss'
-import VariantPropertyList from '../../components/variant-property-list/VariantPropertyList';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductDetails } from '../../redux/store/product';
+
+import VariantPropertyList from '../../components/variant-property-list/VariantPropertyList';
+import ImageSlider from '../../components/image-slider/ImageSlider'
+import BreadCrumb from '../../components/breadcrumb/BreadCrumb';
+import BreadCrumbItem from '../../components/breadcrumb-item/BreadCrumbItem';
+import './product_details.scss'
 
 
 function ProductDetails() {
@@ -21,26 +23,26 @@ function ProductDetails() {
   return (
     <section className="product-details-section">
       <div className="row">
-        {/* related category section */}
         <div className="related-categories">
           <div>
             Related categories
           </div>
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item"><a href="#"><span>home</span> <span>{">"} </span></a></li>
-            <li className="breadcrumb-item"><a href="#"><span>Bags, Wallets...</span> <span>{">"} </span></a></li>
-            <li className="breadcrumb-item"><a href="#"><span>Bags & Backp...</span> <span>{">"} </span></a></li>
-            <li className="breadcrumb-item"><a href="#"><span>Laptop Bags</span> <span>{">"} </span></a></li>
-          </ul>
+          <BreadCrumb>
+            <BreadCrumbItem>Home</BreadCrumbItem>
+            <BreadCrumbItem>Bags & Wallet</BreadCrumbItem>
+            <BreadCrumbItem>Leather</BreadCrumbItem>
+          </BreadCrumb>
         </div>
+
         {/* product details section */}
         <div className="product-details">
-          {/* flex left side */}
+
+          {/* Image slider */}
           <div className="product-details__gallery box-shadow">
             <ImageSlider images={gallery} />
           </div>
 
-          {/* flex right side */}
+          {/* full Product information */}
           <div className="product-details__info">
             <div className="product-details__title">
               <p>{title}</p>
