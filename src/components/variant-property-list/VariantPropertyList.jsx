@@ -1,42 +1,54 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { variantNameEnum } from '../../common/enum';
 import { toggleIsVariantSelected, updateProduct, updateSliderArr } from '../../redux/store/product';
 import VariantPropertyItem from '../variant-property-item/VariantPropertyItem'
 import "./variant-property-list.scss";
-
-const propEnum = {
-  "Color": "Color",
-  "Shoe Size": "Shoe Size"
-}
+import { searchSelectedVariant } from '../../common/helpers/healper';
 
 
 function VariantPropertyList(props) {
   const dispatch = useDispatch();
+
   const {variant} = props;
-  const { gallery, skus } = useSelector(state => state.product.productDetails);
-  const { swiper, selectedVariantColor, isVariantColorSelected } = useSelector(state => state.product.ui)
+  const { name: variantName, values: variantItems} = variant;
 
   const [ selectedId, setSelectedId ] = useState();
   const [ selectedVariantItemName, setSelectedVariantItemName ] = useState("");
-  const { name: variantName, values: variantItems} = variant;
+  const { gallery, skus } = useSelector(state => state.product.productDetails);
+  const { swiper, selectedVariantColor, isVariantColorSelected } = useSelector(state => state.product.ui)
 
   const firstUpdate = useRef(true);
   const variantPropertyRef = useRef(null);
   
+
+  /**
+   * This function will call when click on any variant item
+   * @sing V1.0.0
+   * @param {object} variantItem - selected variant information
+   * @param {string} variantType - variant type. ex: "Color" 
+   */
   function variantItemClickHandler(variantItem, variantType) {
     setSelectedVariantItemName(variantItem.name);
     setSelectedId(variantItem.id);
     updateSlider(variantItem, variantType);
 
+    // will remove "isSelected" class by dom manipulation 
     const isSelected = variantPropertyRef.current.firstChild.classList.contains("selected");
     if(isSelected) {
       variantPropertyRef.current.firstChild.classList.remove("selected");
     }
   }
 
-
+  /**
+   * this function will update product information according to selected variant
+   * @since V1.0.0
+   * @param {object} variantItem - selected variant information 
+   * @param {string} variantType - selected variant type. ex: "Shoe size"
+   */
   const updateSlider = (variantItem, variantType) => {
-    if(variantType === propEnum["Color"]) {
+    if(variantType === variantNameEnum["Color"]) {
       const galleryCopy = [...gallery];
       
       if(selectedVariantColor.color.length === 1) {
@@ -62,57 +74,43 @@ function VariantPropertyList(props) {
       if(swiper) {
         swiper.slideTo(0);
       }
-    } else if( variantType === propEnum['Shoe Size']) {
+    } else if( variantType === variantNameEnum['Shoe Size']) {
       updateSelectedVariantItem(variantItem, variantType);
     }
   }
 
+  /**
+   * @since V1.0.0
+   * @param {object} selectedVariantItem 
+   * @param {string} variantType 
+   */
   const updateSelectedVariantItem = (selectedVariantItem, variantType) => {
     const updatedSelectedVariant = {...selectedVariantColor};
-
-    // variant type could be 'size', 'ram', 'storage'
-    // switch (variantType) {
-    //   case propEnum['Shoe Size']:
-    //     updatedSelectedVariant.size[0] = selectedVariantItem;
-    //     break;
-    //   }
       
-    if(variantType === propEnum['Shoe Size']) {
+    if(variantType === variantNameEnum['Shoe Size']) {
       updatedSelectedVariant.size[0] = selectedVariantItem;
     }
-
-
 
     dispatch(toggleIsVariantSelected({isVariantColorSelected: isVariantColorSelected, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
   }
 
+  // will add "selected" class for first variant item on initial render.
   useEffect(() => {
     variantPropertyRef.current.firstChild.classList.add("selected");
   }, [])
   
 
-
   useEffect(() => {
+    // This statement is for to prevent the initial render.
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
 
-    const matchedSku = skus.find(sku => {
-      if(selectedVariantColor.color.length > 0 && selectedVariantColor.size.length > 0) {
-        return sku.props[0] === selectedVariantColor.color[0].id && sku.props[1] === selectedVariantColor.size[0].id;
-      }
-
-      if(selectedVariantColor.color.length > 0) return sku.props[0] === selectedVariantColor.color[0].id;
-      if(selectedVariantColor.size.length > 0) return sku.props[1] === selectedVariantColor.size[0].id;
-
-    });
-
+    const matchedSku = searchSelectedVariant(skus, selectedVariantColor);
     dispatch(updateProduct(matchedSku));
+
   }, [JSON.stringify(selectedVariantColor)]);
-  
-
-
   
   return (
     <div className="product-details__property-box">
@@ -127,6 +125,10 @@ function VariantPropertyList(props) {
       </ul>
     </div>
   )
+}
+
+VariantPropertyList.prototype = {
+  variant: PropTypes.object.isRequired,
 }
 
 export default VariantPropertyList

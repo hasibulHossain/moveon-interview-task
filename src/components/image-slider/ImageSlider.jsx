@@ -2,25 +2,20 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Navigation, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { setSwiper, toggleIsVariantSelected, updateSliderArr } from '../../redux/store/product';
+import PropTypes from 'prop-types';
+
+import { toggleIsVariantSelected, updateSliderArr } from '../../redux/store/product';
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import './image-slider.scss'
 
 const ImageSlider = props => {
-    const [thumbsSwiper, setThumbsSwiper] = useState();
-    // const [isVariantColorSelected, setIsVariantColorSelected] = useState(false);
-
     const dispatch = useDispatch();
-    const { isVariantColorSelected, selectedVariantColor, swiper} = useSelector(state => state.product.ui)
-
     const { images } = props;
 
-    // TODO: will have to replace this function on color variant component
-    // const selectColorHandler = () => {
-    //     setIsVariantColorSelected(true);
-    // };
+    const [thumbsSwiper, setThumbsSwiper] = useState();
+    const { isVariantColorSelected, selectedVariantColor, swiper} = useSelector(state => state.product.ui)
 
     function slideChangeHandler(_) {
         if(!isVariantColorSelected) return;
@@ -35,13 +30,13 @@ const ImageSlider = props => {
 
         dispatch(toggleIsVariantSelected({isVariantColorSelected: false, selectedVariantColor: updatedSelectedVariant, swiper: swiper}));
     }
-    
+
+    // Only call for initial render to set swiper instance to state.
     function swiperHandler(swiper) {
         dispatch(toggleIsVariantSelected({isVariantColorSelected: isVariantColorSelected, selectedVariantColor: selectedVariantColor, swiper: swiper}));
     }
 
     return <>
-    {/* <button onClick={() => selectColorHandler()}>click swiperHandler</button> */}
         <Swiper
             onSlideChange={slideChangeHandler}
             onSwiper={swiperHandler}
@@ -84,4 +79,9 @@ const ImageSlider = props => {
         </div>
     </>
 }
+
+ImageSlider.prototype = {
+    images: PropTypes.array.isRequired,
+}
+
 export default React.memo(ImageSlider);
