@@ -5,12 +5,12 @@ import * as types from '../types';
  * @param {String} test 
  * @returns {{type: Number, payload: String}}
  */
-export const testOne = (test) => {
-    return {
-        type: types.PRODUCT_LOADING,
-        payload: test
-    }
-};
+// export const testOne = (test) => {
+//     return {
+//         type: types.PRODUCT_LOADING,
+//         payload: test
+//     }
+// };
 
 
 export const toggleIsVariantSelected = ({isVariantColorSelected: isVariantColorSelected, swiper: swiper, selectedVariantColor: selectedVariantColor}) => {
@@ -43,7 +43,12 @@ export const updateProduct = (product) => {
     if(product != undefined) {
         payload.discountedPrice = product.price.discounted;
         payload.oldPrice = product.price.old;
-        payload.discountedPercentage = 9;
+
+        // calculate discount percentage
+        const discount_percent = 100 - ( ( product.price.discounted / product.price.old ) * 100 );
+        const discount = '' +  Math.round( discount_percent);
+
+        payload.discountedPercentage = discount;
     } 
 
     return {

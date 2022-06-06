@@ -5,15 +5,14 @@ function product(state = initialState, { type, payload }) {
         case actions.PRODUCT_LOADING:
             return {
                 ...state,
-                test: payload
             };
 
         case actions.PRODUCT_UPDATE:
             return {
                 ...state,
-                discountedPrice: payload.discountedPrice,
-                oldPrice: payload.oldPrice,
-                discountedPercentage: payload.discountedPercentage,
+                discountedPrice: payload.discountedPrice || state.discountedPrice,
+                oldPrice: payload.oldPrice || state.oldPrice,
+                discountedPercentage: payload.discountedPercentage || state.discountedPercentage,
             };
 
         case actions.PRODUCT_SLIDER_GALLERY_UPDATED:
@@ -39,13 +38,11 @@ function product(state = initialState, { type, payload }) {
         case actions.PRODUCT_LOADED:
             return {
                 ...state,
-                test: payload
             };
 
         case actions.PRODUCT_LOADING_FAILED:
             return {
                 ...state,
-                test: payload
             };
 
         default:
@@ -188,8 +185,8 @@ const initialState = {
     isLoading: false,
     isFetched: false,
     error: false,
-    test: "",
     id: null,
+    title: "Product title",
     discountedPrice: 25,
     oldPrice: 30,
     discountedPercentage: 30,

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { testOne } from './redux/store/product';
+import { useDispatch } from 'react-redux';
 import ProductDetails from './pages/product_details/ProductDetails';
 import './App.css'
 
