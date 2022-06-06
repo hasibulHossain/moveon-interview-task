@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-function BreadCrumbItem({name, href, children}) {
+function BreadCrumbItem({name, href = "#", children}) {
 
     const breadCrumbItemName = name || children;
   return (
