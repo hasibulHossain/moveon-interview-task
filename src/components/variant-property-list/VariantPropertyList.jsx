@@ -19,7 +19,7 @@ function VariantPropertyList(props) {
   const { gallery, skus } = useSelector(state => state.product.productDetails);
   const { swiper, selectedVariantColor, isVariantColorSelected } = useSelector(state => state.product.ui)
 
-  const firstUpdate = useRef(true);
+  const isFirstVariantSelected = useRef(true);
   const variantPropertyRef = useRef(null);
   const dependentOn = JSON.stringify(selectedVariantColor);
 
@@ -34,9 +34,10 @@ function VariantPropertyList(props) {
     setSelectedId(variantItem.id);
     updateSlider(variantItem, variantType);
 
-    // will remove "isSelected" class by dom manipulation 
+    // will remove "isSelected" class from first variant item 
     const isSelected = variantPropertyRef.current.firstChild.classList.contains("selected");
-    if(isSelected) {
+    if(isSelected && isFirstVariantSelected.current) {
+      isFirstVariantSelected.current = false;
       variantPropertyRef.current.firstChild.classList.remove("selected");
     }
   }
@@ -102,12 +103,6 @@ function VariantPropertyList(props) {
   
 
   useEffect(() => {
-    // This statement is for to prevent the initial render.
-    // if (firstUpdate.current) {
-    //   firstUpdate.current = false;
-    //   return;
-    // }
-
     const matchedSku = searchSelectedVariant(skus, selectedVariantColor);
     dispatch(updateProduct(matchedSku));
 
