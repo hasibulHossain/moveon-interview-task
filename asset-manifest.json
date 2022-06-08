@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/moveon-interview-task/static/css/main.976c19e2.css",
-    "main.js": "/moveon-interview-task/static/js/main.bc47708c.js",
+    "main.js": "/moveon-interview-task/static/js/main.944368fe.js",
     "static/js/787.56439044.chunk.js": "/moveon-interview-task/static/js/787.56439044.chunk.js",
     "index.html": "/moveon-interview-task/index.html",
     "main.976c19e2.css.map": "/moveon-interview-task/static/css/main.976c19e2.css.map",
-    "main.bc47708c.js.map": "/moveon-interview-task/static/js/main.bc47708c.js.map",
+    "main.944368fe.js.map": "/moveon-interview-task/static/js/main.944368fe.js.map",
     "787.56439044.chunk.js.map": "/moveon-interview-task/static/js/787.56439044.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.976c19e2.css",
-    "static/js/main.bc47708c.js"
+    "static/js/main.944368fe.js"
   ]
 }
