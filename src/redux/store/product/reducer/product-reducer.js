@@ -57,7 +57,7 @@ function product(state = initialState, { type, payload }) {
                 ...state,
                 ui: {
                     ...state.ui,
-                    swiper: payload.swiper,
+                    swiper: payload.swiper || state.ui.swiper,
                     isVariantColorSelected: payload.isVariantColorSelected,
                     selectedVariantColor: payload.selectedVariantColor,
                 }

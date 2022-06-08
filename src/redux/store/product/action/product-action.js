@@ -43,7 +43,17 @@ export const fetchProductDetails = () => async (dispatch) => {
            }
         };
        
-       dispatch({type: types.PRODUCT_LOADED, payload: updatedRes});   
+       dispatch({type: types.PRODUCT_LOADED, payload: updatedRes});
+
+       const initialVariationProps = {color:[updatedRes.variation.props[0].values[0]], size: [updatedRes.variation.props[1].values[0]]};
+
+       dispatch(toggleIsVariantSelected({swiper: null, isVariantColorSelected: true, selectedVariantColor: initialVariationProps}));
+
+        const galleryCopy = [...updatedRes.gallery];
+        const initialSelectedColorVariant = updatedRes.variation.props[0].values[0];
+        galleryCopy.splice(0, 0, initialSelectedColorVariant);
+
+        dispatch(updateSliderArr(galleryCopy));
     } catch (error) {
        dispatch({type: types.PRODUCT_LOADING_FAILED, payload: {error: true, loading: false}});
    }
