@@ -96,16 +96,17 @@ function VariantPropertyList(props) {
 
   // will add "selected" class for first variant item on initial render.
   useEffect(() => {
+    setSelectedVariantItemName(variantItems[0].name);
     variantPropertyRef.current.firstChild.classList.add("selected");
   }, [])
   
 
   useEffect(() => {
     // This statement is for to prevent the initial render.
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
+    // if (firstUpdate.current) {
+    //   firstUpdate.current = false;
+    //   return;
+    // }
 
     const matchedSku = searchSelectedVariant(skus, selectedVariantColor);
     dispatch(updateProduct(matchedSku));
