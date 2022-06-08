@@ -30,7 +30,7 @@ function VariantPropertyList(props) {
    * @param {string} variantType - variant type. ex: "Color" 
    */
   function variantItemClickHandler(variantItem, variantType) {
-    setSelectedVariantItemName(variantItem.name);
+    setSelectedVariantItemName(variantItem.title);
     setSelectedId(variantItem.id);
     updateSlider(variantItem, variantType);
 
@@ -97,7 +97,7 @@ function VariantPropertyList(props) {
 
   // will add "selected" class for first variant item on initial render.
   useEffect(() => {
-    setSelectedVariantItemName(variantItems[0].name);
+    setSelectedVariantItemName(variantItems[0].title);
     variantPropertyRef.current.firstChild.classList.add("selected");
   }, [])
   
